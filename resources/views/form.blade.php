@@ -22,12 +22,21 @@
             </label>
             <input type="text">
         </div>
+
+        <div class="form-cell">
+            <label for="">
+                邮箱
+            </label>
+            <input type="email" pattern="\d+">
+        </div>
+
         <div class="form-cell">
             <label for="">
                 捐赠数目
             </label>
-            <input type="text" pattern="\d+">
+            <input type="number" min="1" pattern="\d+">
         </div>
+
         <div class="form-cell">
             <label for="">
                 捐赠时间
@@ -37,20 +46,17 @@
 
         <div class="submit-container">
             <button class="submit">提交</button>
-            <p><a href="">我的提交记录</a> </p>
         </div>
     </div>
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
 <script>
-    // 在 #app 标签下渲染一个按钮组件
     new Vue({
         el: '#app',
         data: {
             username: '',
             book_count: '',
-            username2: ''
         },
         methods: {
             onSubmit(values) {
@@ -58,9 +64,6 @@
             },
         }
     });
-
-    // 调用函数组件，弹出一个 Toast
-    Vue.use(vant.Form)
 
 </script>
 <style>
