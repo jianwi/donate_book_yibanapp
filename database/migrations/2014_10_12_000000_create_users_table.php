@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('name')->nullable();
             $table->string('phone')->unique()->nullable();
             $table->string('yb_uid')->unique();
+            $table->string("api_token")->nullable();
             $table->timestamps();
         });
     }
