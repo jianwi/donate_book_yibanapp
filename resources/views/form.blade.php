@@ -27,7 +27,7 @@
             <label for="">
                 邮箱
             </label>
-            <input type="email" pattern="\d+">
+            <input type="email">
         </div>
 
         <div class="form-cell">

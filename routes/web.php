@@ -16,3 +16,5 @@ use Illuminate\Support\Facades\Route;
 Route::view('/',"form")->name('home');
 
 Route::get('/yiban/auth','Auth\Yiban@index')->name('yb_auth');
+
+Route::post('/order/add','OrdersController@store');
