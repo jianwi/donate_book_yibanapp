@@ -22,3 +22,5 @@ Route::post('/order/add','OrdersController@store');
 Route::get('/t',function (){
    dd(auth()->id());
 });
+
+Route::view("/r",'submit_success');

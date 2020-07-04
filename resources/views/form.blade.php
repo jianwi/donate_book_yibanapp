@@ -8,6 +8,7 @@
     <title>表单填写</title>
 </head>
 <body>
+@if(auth()->check())
 <div class="head">
     <img src="/img/sust.jpg" alt="">
    <p>
@@ -15,26 +16,28 @@
    </p>
 </div>
 <div id="app">
+    <form action="/order/add" method="POST" @submit="onSubmit">
+    {{ csrf_field() }}
     <div class="container">
         <div class="form-cell">
             <label>
                 姓名
             </label>
-            <input type="text">
+            <input type="text" v-model="form.name" name="name">
         </div>
 
         <div class="form-cell">
             <label for="">
                 邮箱
             </label>
-            <input type="email">
+            <input type="email" v-model="form.email" name="email">
         </div>
 
         <div class="form-cell">
             <label for="">
-                捐赠数目
+                捐书数目
             </label>
-            <input type="number" min="1" pattern="\d+">
+            <input type="number" min="1" v-model="form.count" name="count" pattern="\d+">
         </div>
 
         <div class="form-cell">
@@ -45,9 +48,11 @@
         </div>
 
         <div class="submit-container">
-            <button class="submit">提交</button>
+            <button type="submit" class="submit">提交</button>
         </div>
     </div>
+    </form>
+
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.min.js"></script>
@@ -55,12 +60,18 @@
     new Vue({
         el: '#app',
         data: {
+            form:{
+              'name':'',
+              'count': 0,
+              'email': ''
+            },
             username: '',
             book_count: '',
         },
         methods: {
-            onSubmit(values) {
-                console.log('submit', values);
+            onSubmit() {
+                console.log('submit', this.form);
+                return false;
             },
         }
     });
@@ -123,5 +134,10 @@
         font-size: 1.3em;
     }
 </style>
+    @else
+<div>
+    未登录
+    @endif
+</div>
 </body>
 </html>

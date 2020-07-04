@@ -15,13 +15,12 @@ class OrdersController extends Controller
             "name" => 'required',
             "count" => 'required|numeric'
         ]);
-        $validate['user_id'] = 1;
+
+        $validate['user_id'] = auth()->id();
 
         $res = Order::forceCreate($validate);
         if ($res){
-            return [
-                'code'=>200
-            ];
+            return view('submit_success');
         }
     }
     public function index()
