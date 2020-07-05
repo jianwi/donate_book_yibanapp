@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\OrderShipped;
 use App\Models\Order;
+use App\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class OrdersController extends Controller
 {
@@ -42,6 +46,7 @@ class OrdersController extends Controller
         $order->save();
 
 //        TODO: 发送邮件
+        Mail::to(Order::find(1))->send(new OrderShipped(Order::find(1)));
 
         if ($order){
             return $order;
@@ -50,5 +55,11 @@ class OrdersController extends Controller
                 'code'=>0
             ];
         }
+    }
+
+    public function certificate($id)
+    {
+        $order = Order::find($id);
+        return view("certificate",compact('order'));
     }
 }

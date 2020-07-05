@@ -20,12 +20,13 @@ Route::get('/yiban/auth','Auth\Yiban@index')->name('yb_auth');
 Route::post('/order/add','OrdersController@store');
 Route::get('/orders','OrdersController@index');
 
-Route::get('/t',function (){
-    $html = '<html><head><meta charset="utf-8"></head><h1>订单id</h1><h2>12346546</h2></html>';
-    $pdf = \PDF::loadHTML($html);
-    return $pdf->inline();
+Route::get('/certificate/{id}.png',function ($id){
+   $o = \App\Models\Order::find($id);
+   return $o->generateCertificate();
 });
 
 Route::view("/admin",'admin');
 
 Route::post("/order/check/{id}","OrdersController@checkIt");
+
+Route::get('/cer/{id}','OrdersController@certificate');
