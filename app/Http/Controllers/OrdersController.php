@@ -25,7 +25,7 @@ class OrdersController extends Controller
     }
     public function index(Request $request)
     {
-        $orders = \App\Http\Resources\Order::collection(Order::orderBy("id",'desc')->paginate(2));
+        $orders = \App\Http\Resources\Order::collection(Order::orderBy("id",'desc')->paginate(10));
         return $orders;
     }
 

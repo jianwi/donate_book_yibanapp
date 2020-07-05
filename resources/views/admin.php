@@ -49,12 +49,12 @@
 
             <el-table-column
                 label="提交状态"
-                width="120">
+                width="220">
                 <template slot-scope="scope">
                     {{ getStatus(scope.row.status) }}
                 </template>
             </el-table-column>
-            <el-table-column label="操作">
+            <el-table-column label="操作" width="300">
                 <template slot-scope="scope">
                     <el-button
                         size="mini"
@@ -69,6 +69,15 @@
 
 
     <div class="pagination">
+        <el-pagination
+            background
+            layout="prev, pager, next"
+            :total="total"
+            @current-change="handleCurrentPageChange"
+            :current-page="currentPage"
+            :page-size="10"
+        >
+        </el-pagination>
     </div>
 </div>
 <script src="/js/vue.js"></script>
@@ -78,16 +87,23 @@
     new Vue({
         el: '#app',
         data: {
-            "orders" : []
+            "orders" : [],
+            currentPage:1,
+            total:1,
         },
         methods: {
             loadOrder() {
-                axios.get("/orders").then(res=>{
+                axios.get("/orders?page="+this.currentPage).then(res=>{
                     console.log(res)
                     this.orders = res.data.data
-
+                    this.total = res.data.meta.total
                 })
                 return false;
+            },
+            handleCurrentPageChange(val)
+            {
+                this.currentPage = val
+                this.loadOrder()
             },
             getStatus(state)
             {
