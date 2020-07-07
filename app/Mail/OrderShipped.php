@@ -32,7 +32,7 @@ class OrderShipped extends Mailable
      */
     public function build()
     {
-        return $this->from('bestjianwi@163.com')
+        return $this->from(config("mail.from.address"))
             ->attachData($this->order->generateCertificate(),'证书.png',[
                 "mime" => ' image/png'
             ])
