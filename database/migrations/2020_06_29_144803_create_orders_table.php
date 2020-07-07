@@ -22,6 +22,7 @@ class CreateOrdersTable extends Migration
             $table->string("file")->nullable();
             $table->integer("status")->default(0);
             $table->boolean("has_send")->default(false);
+            $table->integer("admin_user_yb_uid")->nullable();
             $table->timestamps();
         });
     }

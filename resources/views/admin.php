@@ -7,7 +7,6 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>管理界面</title>
     <link href="https://cdn.bootcdn.net/ajax/libs/element-ui/2.13.2/theme-chalk/index.css" rel="stylesheet">
-
 </head>
 <body>
 <div id="app">
@@ -114,10 +113,13 @@
                       return "未通过审核"
                   case 0:
                       return "待审核"
+                  case 8:
+                      return "邮件正在发送中，请稍等"
               }
             },
             checkIt(type,id,index)
             {
+                this.orders[index]['status'] = 8
                 axios.post("/order/check/"+id,{
                     'type':type
                 }).then(res=>{
@@ -127,6 +129,14 @@
         },
         mounted()
         {
+            if (!sessionStorage.getItem("isLogin")){
+                if (prompt("请输入密码") != "adminyiban"){
+                    return location.href ="/"
+                }else {
+                    sessionStorage.setItem("isLogin",true)
+                }
+            }
+
             this.loadOrder()
         }
     });

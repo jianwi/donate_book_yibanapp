@@ -45,8 +45,8 @@ class OrdersController extends Controller
         $order->status = $type;
         $order->save();
 
-//        TODO: 发送邮件
-        Mail::to(Order::find(1))->send(new OrderShipped(Order::find(1)));
+//       发送邮件
+        $order->sendEmail();
 
         if ($order){
             return $order;
@@ -62,4 +62,5 @@ class OrdersController extends Controller
         $order = Order::find($id);
         return view("certificate",compact('order'));
     }
+
 }

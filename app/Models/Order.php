@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use App\Mail\OrderShipped;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Mail;
 
 class Order extends Model
 {
@@ -25,12 +27,12 @@ class Order extends Model
                 $font->align('justify');
 //                $font->color();
             })
-            ->response("png",80);
+            ->stream("png");
     }
 
 
     public function sendEmail()
     {
-
+        Mail::to($this)->send(new OrderShipped($this));
     }
 }
