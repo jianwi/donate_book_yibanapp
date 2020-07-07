@@ -36,6 +36,7 @@ class OrderShipped extends Mailable
             ->attachData($this->order->generateCertificate(),'证书.png',[
                 "mime" => ' image/png'
             ])
-            ->view('email');
+            ->view('email')
+            ->subject("证书邮件");
     }
 }
