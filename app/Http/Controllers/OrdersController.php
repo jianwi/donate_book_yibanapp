@@ -45,8 +45,10 @@ class OrdersController extends Controller
         $order->status = $type;
         $order->save();
 
-//       发送邮件
-        $order->sendEmail();
+        if ($type == "1"){
+            //       发送邮件
+            $order->sendEmail();
+        }
 
         if ($order){
             return $order;

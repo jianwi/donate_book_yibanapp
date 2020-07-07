@@ -115,11 +115,21 @@
                       return "待审核"
                   case 8:
                       return "邮件正在发送中，请稍等"
+                  case 10:
+                      return "正在处理中"
               }
             },
             checkIt(type,id,index)
             {
-                this.orders[index]['status'] = 8
+                if (type == 1){
+                    this.orders[index]['status'] = 8
+                }else {
+                    if (confirm("确认审核此项为不通过？")){
+                        this.orders[index]['status'] = 10
+                    }else {
+                        return
+                    }
+                }
                 axios.post("/order/check/"+id,{
                     'type':type
                 }).then(res=>{
